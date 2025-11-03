@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    /* 🔥 Stylish Animated Heading */
+    .h1 {
+      text-align: center;
+      font-size: 3rem;
+      color: gold;
+      font-weight: bold;
+      margin-bottom: 40px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px #bf1111, 0 0 20px #ffae00, 0 0 30px #000000;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #ffd700, 0 0 10px #ffae00, 0 0 20px #ff8800;
+      }
+
+      to {
+        text-shadow: 0 0 15px #ffee00, 0 0 25px #ffcc00, 0 0 35px #ff9900;
+      }
+    }
+
+    /* 🌈 Background & Layout */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffffff, #243B55);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* 🧮 Calculator */
+    .calculator {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 20px;
+      width: 320px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .display {
+      background: #000;
+      color: #0ff;
+      font-size: 2rem;
+      text-align: right;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 2px solid gold;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 1.4rem;
+      border: none;
+      border-radius: 10px;
+      background: #333;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    .op {
+      background: #ff9500;
+    }
+
+    .op:hover {
+      background: #e48a00;
+    }
+
+    .equal {
+      background: #28a745;
+      grid-column: span 2;
+    }
+
+    .equal:hover {
+      background: #218838;
+    }
+
+    .clear {
+      background: #dc3545;
+    }
+
+    .clear:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="h1">Welcome to My Code</h1>
+
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button class="op">/</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button class="op">*</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="op">-</button>
+      <button>0</button>
+      <button>.</button>
+      <button class="equal">=</button>
+      <button class="op">+</button>
+      <button class="clear">C</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll("button");
+    let input = "";
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const value = btn.textContent;
+
+        if (value === "C") {
+          input = "";
+          display.textContent = "0";
+        } else if (value === "=") {
+          try {
+            input = eval(input).toString();
+            display.textContent = input;
+          } catch {
+            display.textContent = "Error";
+            input = "";
+          }
+        } else {
+          if (display.textContent === "0" && value !== ".") {
+            input = value;
+          } else {
+            input += value;
+          }
+          display.textContent = input;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
